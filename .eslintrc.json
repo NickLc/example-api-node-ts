@@ -1,0 +1,14 @@
+{
+  "extends": "standard-with-typescript",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "rules": {
+    "no-console": "error",
+    "indent": ["error", 2],
+    "@typescript-eslint/space-before-function-paren": "off"
+    // "@typescript-eslint/explicit-function-return-type": "off",
+    // "@typescript-eslint/no-extraneous-class": "off",
+    // "@typescript-eslint/no-misused-promises": "off"
+  }
+}
