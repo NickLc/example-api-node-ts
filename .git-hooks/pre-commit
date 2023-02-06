@@ -3,7 +3,7 @@ STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g
 
 # run linter on staged files
 echo "LINTER: Running Linter..⚒️⚒️⚒️"
-./node_modules/.bin/ts-standard $STAGED_FILES --quiet --fix 
+./node_modules/.bin/ts-standard $STAGED_FILES --quiet --fix
 LINTER_EXIT_CODE=$?
 
 # run Prettier on staged files
