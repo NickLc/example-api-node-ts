@@ -27,3 +27,5 @@ Abrir en el navegador la siguiente URL
 ```bash
 http://localhost:8080/api/v1/docs
 ```
+
+![imagen](https://user-images.githubusercontent.com/37456591/217107980-e234a093-4458-4f42-85ec-ae4e7a32cd8d.png)
