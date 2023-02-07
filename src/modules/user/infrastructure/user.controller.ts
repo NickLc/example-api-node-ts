@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
+import { zParse } from '../../../shared/middleware/validator/validator-zod'
 import { userUseCase } from '../application'
+import { UserControllerSchema } from './user.controller.schema'
 
 export class UserController {
   findAll(req: Request, res: Response, next: NextFunction) {
@@ -13,10 +15,10 @@ export class UserController {
     }
   }
 
-  register(req: Request, res: Response, next: NextFunction) {
+  async register(req: Request, res: Response, next: NextFunction) {
     try {
-      const input = req.body
-      const user = userUseCase.register(input)
+      const { body: _input } = await zParse(UserControllerSchema.register, req)
+      const user = userUseCase.register(_input)
       return res.status(StatusCodes.CREATED).send({
         message: 'Se ha creado correctamente el registro',
         data: user
@@ -26,11 +28,13 @@ export class UserController {
     }
   }
 
-  update(req: Request, res: Response, next: NextFunction) {
+  async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const { id } = req.params
-      const input = req.body
-      const user = userUseCase.update(Number(id), input)
+      const {
+        params: { id },
+        body: input
+      } = await zParse(UserControllerSchema.update, req)
+      const user = userUseCase.update(id, input)
       return res.status(StatusCodes.OK).send({
         message: 'Se ha actualizado correctamente el registro',
         data: user
@@ -40,9 +44,11 @@ export class UserController {
     }
   }
 
-  remove(req: Request, res: Response, next: NextFunction) {
+  async remove(req: Request, res: Response, next: NextFunction) {
     try {
-      const { id } = req.params
+      const {
+        params: { id }
+      } = await zParse(UserControllerSchema.remove, req)
       const user = userUseCase.delete(Number(id))
       return res.status(StatusCodes.OK).send({
         message: 'Se ha eliminado correctamente el registro',

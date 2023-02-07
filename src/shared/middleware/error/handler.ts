@@ -10,6 +10,5 @@ export const errorHandler = (
 ): void => {
   const status = parseInt(err.status) || 500
   const message = err.message || 'Error Internal'
-  console.log(err.message)
-  res.status(status).send({ message })
+  res.status(status).send({ message, cause: err?.cause })
 }
