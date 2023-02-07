@@ -46,7 +46,7 @@ describe('User', () => {
       const newUser: UserData = {
         id: 1,
         username: 'test',
-        password: 'test',
+        password: 'password',
         status: 'Activo',
         mount: 1000
       }
@@ -64,6 +64,21 @@ describe('User', () => {
           message: 'Se ha creado correctamente el registro',
           data: newUser
         })
+      })
+
+      it('should error register and return 422', async () => {
+        const newUser = {
+          id: 1,
+          username: 'el',
+          password: 'pass',
+          status: 'Activado',
+          mount: -124
+        }
+        const res = await request(app)
+          .post(route)
+          .set('Authorization', `Bearer ${token}`)
+          .send(newUser)
+        expect(res.status).toBe(422)
       })
 
       it('should error register and return 500', async () => {
@@ -88,7 +103,7 @@ describe('User', () => {
         const user: UserData = {
           id: 1,
           username: 'admin',
-          password: 'admin',
+          password: 'password',
           status: 'Activo',
           mount: 1000
         }
@@ -120,7 +135,7 @@ describe('User', () => {
       const user: UserData = {
         id: 1,
         username: 'admin',
-        password: 'admin',
+        password: 'password',
         status: 'Activo',
         mount: 1000
       }
