@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express, { Router } from 'express'
+// Set controller allways using ./controller not use @user/infraestructure
 import { userController } from './user.controller'
 
 class UserRoute {

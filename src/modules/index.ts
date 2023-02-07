@@ -1,5 +1,5 @@
 import { Express } from 'express'
-import { userRoutes } from './user/infrastructure'
+import { userRoutes } from '@user/infrastructure'
 
 const ROUTES = [userRoutes]
 

@@ -1,5 +1,5 @@
 import { ValidationChain } from 'express-validator'
-import { RulesBody, RulesParam } from '../../../shared'
+import { RulesBody, RulesParam } from '@shared/middleware'
 
 export class UserRules {
   register(): ValidationChain[] {

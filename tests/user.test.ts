@@ -1,9 +1,9 @@
 import request from 'supertest'
 import app from '../src/app'
 import { ERROR_RESPONSE } from './mocks/error'
-import { userUseCase } from '../src/modules/user/application'
-import { UserData } from '../src/modules/user/domain'
-import users from '../src/db/user.json'
+import { userUseCase } from '@user/application'
+import { UserData } from '@user/domain'
+import users from '@db/user.json'
 
 describe('User', () => {
   let token: string

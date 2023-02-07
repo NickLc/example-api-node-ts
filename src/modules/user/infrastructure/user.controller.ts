@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
-import { zParse } from '../../../shared/middleware/validator/validator-zod'
-import { userUseCase } from '../application'
-import { UserControllerSchema } from './user.controller.schema'
+import { zParse } from '@shared/middleware'
+import { userUseCase } from '@user/application'
+import { UserControllerSchema } from '@user/infrastructure'
 
 export class UserController {
   findAll(req: Request, res: Response, next: NextFunction) {

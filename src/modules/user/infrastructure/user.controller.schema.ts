@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { user, id } from '../domain/user.schema'
+import { user, id } from '@user/domain'
 
 export const UserControllerSchema = {
   register: z.object({

@@ -1,6 +1,6 @@
-import { userRepository, UserData, User, UserUpdateInput } from '../domain'
+import { userRepository, UserData, User, UserUpdateInput } from '@user/domain'
 
-export class UserUseCase {
+class UserUseCase {
   findAll(): UserData[] {
     return userRepository.findAll().map((user) => user.getData())
   }

@@ -1,6 +1,6 @@
-import { UserData } from './user.types'
-import users from '../../../db/user.json'
-import { User } from './user'
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import { User, UserData } from '@user/domain'
+import users from '@db/user.json'
 import * as fs from 'fs'
 
 export class UserRepository {

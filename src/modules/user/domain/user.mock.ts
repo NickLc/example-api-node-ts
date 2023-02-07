@@ -1,4 +1,4 @@
-import { UserData } from './user.types'
+import { UserData } from '@user/domain'
 
 export const users: UserData[] = [
   {

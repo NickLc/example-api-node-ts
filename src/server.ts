@@ -3,6 +3,7 @@
 import 'reflect-metadata'
 import * as dotenv from 'dotenv'
 import app from './app'
+require('module-alias/register')
 
 dotenv.config()
 const PORT: number = parseInt(process.env.PORT as string, 10)

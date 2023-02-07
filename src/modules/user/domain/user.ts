@@ -1,6 +1,5 @@
-import { UserData, UserUpdateInput } from './user.types'
-import { userRepository } from './user.repository'
-import users from '../../../db/user.json'
+import { userRepository, UserData, UserUpdateInput } from '@user/domain'
+import users from '@db/user.json'
 
 export class User {
   private data: UserData
