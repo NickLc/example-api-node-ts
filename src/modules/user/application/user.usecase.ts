@@ -1,24 +1,28 @@
-import { userRepository, UserData, User, UserUpdateInput } from '@user/domain'
+import { UserData, User, UserUpdateInput, UserRepository } from '@user/domain'
 
-class UserUseCase {
+export class UserUseCase {
+  userRepository: UserRepository
+
+  constructor(userRepository: UserRepository) {
+    this.userRepository = userRepository
+  }
+
   findAll(): UserData[] {
-    return userRepository.findAll().map((user) => user.getData())
+    return this.userRepository.findAll().map((user) => user.getData())
   }
 
   register(input: UserData): UserData {
-    const user = new User(input)
+    const user = new User(input, this.userRepository)
     return user.create().getData()
   }
 
   update(id: number, input: UserUpdateInput): UserData {
-    const user = userRepository.findByIdOrThrow(id)
+    const user = this.userRepository.findByIdOrThrow(id)
     return user.update(input).getData()
   }
 
   delete(id: number): UserData {
-    const user = userRepository.findByIdOrThrow(id)
-    return user.delete().getData()
+    const user = this.userRepository.findByIdOrThrow(id)
+    return user.softDelete().getData()
   }
 }
-
-export const userUseCase = new UserUseCase()

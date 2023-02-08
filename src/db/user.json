@@ -4,8 +4,7 @@
     "username": "admin",
     "password": "admin",
     "status": "Activo",
-    "mount": 1000,
-    "deleted": true
+    "mount": 1000
   },
   {
     "id": 2,
@@ -19,6 +18,7 @@
     "username": "admin22",
     "password": "admin22",
     "status": "Activo",
-    "mount": 1000
+    "mount": 1000,
+    "deleted": true
   }
 ]

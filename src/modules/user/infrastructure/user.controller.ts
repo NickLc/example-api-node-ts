@@ -2,9 +2,11 @@
 import { NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { zParse } from '@shared/middleware'
-import { userUseCase } from '@user/application'
+import { UserUseCase } from '@user/application'
 import { UserControllerSchema } from '@user/infrastructure'
+import { JsonUserRepository } from './json.user.repository'
 
+export const userUseCase = new UserUseCase(new JsonUserRepository())
 export class UserController {
   findAll(req: Request, res: Response, next: NextFunction) {
     try {

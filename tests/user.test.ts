@@ -1,13 +1,12 @@
 import request from 'supertest'
 import app from '../src/app'
-import { ERROR_RESPONSE } from './mocks/error'
-import { userUseCase } from '@user/application'
 import { UserData } from '@user/domain'
 import users from '@db/user.json'
+import { userUseCase } from '@user/infrastructure'
+import { ERROR_RESPONSE, fnError } from './mocks'
 
 describe('User', () => {
   let token: string
-
   beforeEach(async () => {
     // jest.useFakeTimers()
     // const resLogin = await login();
@@ -22,8 +21,9 @@ describe('User', () => {
       it('should success list and return 200', async () => {
         userUseCase.findAll = jest.fn().mockImplementation(() => [users])
         userUseCase.findAll()
-        const res = await request(app).get(route)
-        // .set('Authorization', `Bearer ${token}`)
+        const res = await request(app)
+          .get(route)
+          .set('Authorization', `Bearer ${token}`)
         expect(res.status).toBe(200)
         expect(res.body).toEqual({
           data: [users]
@@ -31,9 +31,7 @@ describe('User', () => {
       })
 
       it('should error list and return 200', async () => {
-        userUseCase.findAll = jest.fn().mockImplementation(() => {
-          throw new Error(ERROR_RESPONSE.message)
-        })
+        userUseCase.findAll = fnError
         const res = await request(app)
           .get(route)
           .set('Authorization', `Bearer ${token}`)
@@ -44,7 +42,7 @@ describe('User', () => {
 
     describe('POST - register user', () => {
       const newUser: UserData = {
-        id: 1,
+        id: 1100,
         username: 'test',
         password: 'password',
         status: 'Activo',
@@ -82,9 +80,7 @@ describe('User', () => {
       })
 
       it('should error register and return 500', async () => {
-        userUseCase.register = jest.fn().mockImplementation(() => {
-          throw new Error(ERROR_RESPONSE.message)
-        })
+        userUseCase.register = fnError
         const res = await request(app)
           .post(route)
           .set('Authorization', `Bearer ${token}`)
@@ -120,9 +116,7 @@ describe('User', () => {
       })
 
       it('should error delete and return 500', async () => {
-        userUseCase.delete = jest.fn().mockImplementation(() => {
-          throw new Error(ERROR_RESPONSE.message)
-        })
+        userUseCase.delete = fnError
         const res = await request(app)
           .delete(route)
           .set('Authorization', `Bearer ${token}`)
@@ -155,9 +149,7 @@ describe('User', () => {
       })
 
       it('should error update and return 500', async () => {
-        userUseCase.update = jest.fn().mockImplementation(() => {
-          throw new Error(ERROR_RESPONSE.message)
-        })
+        userUseCase.update = fnError
         const res = await request(app)
           .put(route)
           .set('Authorization', `Bearer ${token}`)
