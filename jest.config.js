@@ -9,5 +9,6 @@ module.exports = {
     '^@db/(.*)$': '<rootDir>/src/db/$1'
   },
   collectCoverage: true,
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
   collectCoverageFrom: ['src/**/*.{js,ts}']
 }
