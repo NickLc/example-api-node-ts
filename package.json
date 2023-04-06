@@ -10,8 +10,8 @@
     "start": "node dist/src/server.js",
     "format": "prettier --write \"src/**/*.{ts,js,json}\" --ignore-path .prettierignore",
     "lint": "ts-standard --ext .js,.ts \"./**/*.{ts,js}\" --fix",
-    "test": "node_modules/.bin/jest --runInBand --verbose",
-    "test-coverage": "node_modules/.bin/jest --watchAll --runInBand --verbose --coverage"
+    "test": "jest --runInBand --verbose",
+    "test-coverage": "jest --watchAll --runInBand --verbose --coverage"
   },
   "repository": {
     "type": "git",
