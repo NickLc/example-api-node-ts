@@ -19,10 +19,10 @@ class UnprocessableEntityError extends Error {
 
 export async function zParse<T extends AnyZodObject>(
   schema: T,
-  req: Request
+  data: any
 ): Promise<z.infer<T>> {
   try {
-    return await schema.parseAsync(req)
+    return await schema.parseAsync(data)
   } catch (error) {
     if (error instanceof ZodError) {
       throw new UnprocessableEntityError(error)
