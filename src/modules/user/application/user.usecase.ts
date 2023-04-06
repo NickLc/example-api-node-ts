@@ -8,7 +8,7 @@ export class UserUseCase {
   }
 
   findAll(): UserData[] {
-    return this.userRepository.findAll().map((user) => user.getData())
+    return this.userRepository.findAll()
   }
 
   register(input: UserData): UserData {
@@ -17,12 +17,14 @@ export class UserUseCase {
   }
 
   update(id: number, input: UserUpdateInput): UserData {
-    const user = this.userRepository.findByIdOrThrow(id)
+    const userData = this.userRepository.findByIdOrThrow(id)
+    const user = new User(userData, this.userRepository)
     return user.update(input).getData()
   }
 
   delete(id: number): UserData {
-    const user = this.userRepository.findByIdOrThrow(id)
+    const userData = this.userRepository.findByIdOrThrow(id)
+    const user = new User(userData, this.userRepository)
     return user.softDelete().getData()
   }
 }

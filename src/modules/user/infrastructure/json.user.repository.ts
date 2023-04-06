@@ -1,27 +1,24 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { User, UserData, UserRepository } from '@user/domain'
+import { UserData, UserRepository } from '@user/domain'
 import users from '@db/user.json'
 import * as fs from 'fs'
 
 export class JsonUserRepository implements UserRepository {
-  findAll(): User[] {
-    return users
-      .map((user) => new User(user as UserData, this))
-      .filter((users) => !users.isDeleted())
+  findAll(): UserData[] {
+    return users.filter((users) => !users.deleted) as UserData[]
   }
 
-  findByIdOrThrow(id: number): User {
-    const user = this.findAll().find((user) => user.getData().id === id)
-    if (user == null) {
+  findByIdOrThrow(id: number): UserData {
+    const userData = this.findAll().find((user) => user.id === id)
+    if (userData == null) {
       throw new Error('User not found in the database')
     }
-    return user
+    return userData
   }
 
   throwIfExistsInDB(user: UserData): void {
     const userFound = this.findAll().find(
-      (u) =>
-        u.getData().username === user.username || u.getData().id === user.id
+      (u) => u.username === user.username || u.id === user.id
     )
     if (userFound != null) {
       throw new Error('User already exists in the database')
